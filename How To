@@ -1,0 +1,27 @@
+Here described the way of setup Home Assistance, Conbee II on linux using Docker.
+
+1 Install Ubuntu, i used 20.04 as this is latest version and i did install in On I5 NUC.
+Then install docker - Simple, google for install command
+
+Install Portainer, - will be easyer to manage all your containers, images.
+
+Install Home Assitance, hereis the trick.
+In docker you need to expose everething so i used this commnad:
+
+ docker run --init -d --name="home-assistant" -e "TZ=Asia/Jerusalem" --device=/dev/ttyACM0 -v /home/vitalyb/dockers/hassio/config:/config -p 8123:8123 homeassistant/home-assistant:stable
+
+
+ docker run --init -d 
+ --name="home-assistant"  container name 
+ -e "TZ=Asia/Jerusalem"    : time zone
+ --device=/dev/ttyACM0    : mounted USB port
+ -v /dockers/ha/config:/config   : mouned local folder
+ -p 8123:8123    : Exposed Port
+ homeassistant/home-assistant:stable    : Repository
+ 
+ Then i just install ZHA Module using integrations,
+ selec the right usb port  and added ZIGBEE device.
+ Now i am using only Aqara temperature, but will order more soon.
+ Have no any idea what is supported, but i assume google can help.
+ 
+ good luck
